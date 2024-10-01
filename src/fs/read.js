@@ -9,9 +9,9 @@ const read = async () => {
 
   try {
     const content = await fs.readFile(fileToReadPath, 'utf-8');
-    console.log(content);
+    return content;
   } catch {
-    console.error('FS operation failed');
+    throw new Error('FS operation failed');
   }
 };
 
