@@ -11,12 +11,10 @@ const remove = async () => {
   try {
     await fs.access(fileToRemovePath);
   } catch {
-    console.error('FS operation failed');
-    return;
+    throw new Error('FS operation failed');
   }
 
   await fs.unlink(fileToRemovePath);
-  console.log('File removed');
 };
 
 await remove();

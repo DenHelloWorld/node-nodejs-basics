@@ -6,36 +6,29 @@ const rename = async () => {
   const __filename = fileURLToPath(import.meta.url);
   const __dirname = path.dirname(__filename);
   const filesDir = path.join(__dirname, 'files');
-  const oldFilePath = path.join(filesDir, 'wrongFilename.txt');
-  const newFilePath = path.join(filesDir, 'properFilename.md');
+  const wrongFilePath = path.join(filesDir, 'wrongFilename.txt');
+  const properFilePath = path.join(filesDir, 'properFilename.md');
 
-  const oldFileExists = fs
-    .access(oldFilePath)
+  const wrongFileExists = fs
+    .access(wrongFilePath)
     .then(() => true)
     .catch(() => false);
 
-  const newFileExists = fs
-    .access(newFilePath)
+  const properFileExists = fs
+    .access(properFilePath)
     .then(() => true)
     .catch(() => false);
 
-  const [oldExists, newExists] = await Promise.all([
-    oldFileExists,
-    newFileExists,
+  const [wrongExists, properExists] = await Promise.all([
+    wrongFileExists,
+    properFileExists,
   ]);
 
-  if (!oldExists) {
-    console.error('FS operation failed');
-    return;
+  if (!wrongExists || properExists) {
+    throw new Error('FS operation failed');
   }
 
-  if (newExists) {
-    console.error('FS operation failed');
-    return;
-  }
-
-  await fs.rename(oldFilePath, newFilePath);
-  console.log('File renamed');
+  await fs.rename(wrongFilePath, properFilePath);
 };
 
 await rename();

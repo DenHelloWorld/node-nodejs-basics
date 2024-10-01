@@ -13,19 +13,13 @@ const copy = async () => {
     .then(() => true)
     .catch(() => false);
 
-  if (!srcExists) {
-    console.error('FS operation failed');
-    return;
-  }
-
   const dstExists = await fs
     .access(filesCopyDir)
     .then(() => true)
     .catch(() => false);
 
-  if (dstExists) {
-    console.error('FS operation failed');
-    return;
+  if (!srcExists || dstExists) {
+    throw new Error('FS operation failed');
   }
 
   await fs.mkdir(filesCopyDir);
@@ -37,8 +31,6 @@ const copy = async () => {
       fs.copyFile(path.join(filesDir, file), path.join(filesCopyDir, file))
     )
   );
-
-  console.log('Files copied');
 };
 
 await copy();

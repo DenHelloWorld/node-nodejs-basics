@@ -9,16 +9,10 @@ const list = async () => {
 
   try {
     await fs.access(filesDir);
-  } catch {
-    console.error('FS operation failed');
-    return;
-  }
-
-  try {
     const files = await fs.readdir(filesDir);
-    console.log(files);
-  } catch (error) {
-    console.error('FS operation failed');
+    process.stdout.write(files.join('\n') + '\n');
+  } catch {
+    throw new Error('FS operation failed');
   }
 };
 
