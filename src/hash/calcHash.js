@@ -2,6 +2,7 @@ import { createReadStream } from 'fs';
 import { createHash } from 'crypto';
 import { pipeline } from 'stream/promises';
 import { fileURLToPath } from 'url';
+
 import path from 'path';
 
 const calculateHash = async () => {
@@ -13,9 +14,9 @@ const calculateHash = async () => {
 
   try {
     await pipeline(stream, hash);
-    console.log(hash.digest('hex'));
+    process.stdout.write(hash.digest('hex') + '\n');
   } catch (error) {
-    console.error('Error calculateHash:', error);
+    process.stderr.write('Error calculateHash: ' + error.message + '\n');
   }
 };
 
