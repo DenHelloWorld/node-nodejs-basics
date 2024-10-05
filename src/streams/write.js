@@ -11,7 +11,7 @@ const write = async () => {
   const writableStream = new Writable({
     write(chunk, encoding, callback) {
       try {
-        fs.appendFileSync(fileToWrite, chunk, encoding);
+        fs.promises.appendFile(fileToWrite, chunk, encoding);
         callback();
       } catch (error) {
         callback(new Error(error.message));
