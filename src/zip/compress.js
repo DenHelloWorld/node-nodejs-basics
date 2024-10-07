@@ -18,7 +18,7 @@ const compress = async () => {
     .pipe(writeStream)
     .on('finish', () => {
       process.stdout.write(
-        `File ${fileToCompress} has been compressed to ${archive}\n`
+        `File ${fileToCompress} has been compressed to archive\n`
       );
     })
     .on('error', (error) => {
