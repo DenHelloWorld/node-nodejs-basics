@@ -33,4 +33,10 @@ const copy = async () => {
   );
 };
 
-await copy();
+await copy()
+  .then(() => {
+    process.stdout.write('Succesfull');
+  })
+  .catch((e) => {
+    process.stderr.write(e.message);
+  });

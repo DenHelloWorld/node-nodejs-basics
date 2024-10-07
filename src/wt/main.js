@@ -20,12 +20,6 @@ const performCalculations = async () => {
         resolve();
         worker.terminate();
       });
-
-      worker.on('error', () => {
-        result[index] = { status: 'error', data: null };
-        resolve();
-        worker.terminate();
-      });
     });
   });
 

@@ -15,4 +15,10 @@ const read = async () => {
   }
 };
 
-await read();
+await read()
+  .then(() => {
+    process.stdout.write('Succesfull');
+  })
+  .catch((e) => {
+    process.stderr.write(e.message);
+  });

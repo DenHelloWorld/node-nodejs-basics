@@ -16,4 +16,10 @@ const list = async () => {
   }
 };
 
-await list();
+await list()
+  .then(() => {
+    process.stdout.write('Succesfull');
+  })
+  .catch((e) => {
+    process.stderr.write(e.message);
+  });

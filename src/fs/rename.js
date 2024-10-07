@@ -31,4 +31,10 @@ const rename = async () => {
   await fs.rename(wrongFilePath, properFilePath);
 };
 
-await rename();
+await rename()
+  .then(() => {
+    process.stdout.write('Succesfull');
+  })
+  .catch((e) => {
+    process.stderr.write(e.message);
+  });

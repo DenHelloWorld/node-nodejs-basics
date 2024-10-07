@@ -19,4 +19,10 @@ const create = async () => {
   await fs.writeFile(filePath, 'I am fresh and young', { flag: 'wx' });
 };
 
-await create();
+await create()
+  .then(() => {
+    process.stdout.write('Succesfull');
+  })
+  .catch((e) => {
+    process.stderr.write(e.message);
+  });

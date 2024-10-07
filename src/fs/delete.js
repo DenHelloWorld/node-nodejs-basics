@@ -17,4 +17,10 @@ const remove = async () => {
   await fs.unlink(fileToRemovePath);
 };
 
-await remove();
+await remove()
+  .then(() => {
+    process.stdout.write('Succesfull');
+  })
+  .catch((e) => {
+    process.stderr.write(e.message);
+  });
